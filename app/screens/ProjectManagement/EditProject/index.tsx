@@ -7,7 +7,7 @@ LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 import styles from './styles';
 
-const addProject: React.FC = () => {
+const editProject: React.FC = () => {
   const onSave = () => {
     try {
       return (
@@ -53,4 +53,4 @@ const addProject: React.FC = () => {
   );
 };
 
-export default addProject;
+export default editProject;
