@@ -18,7 +18,7 @@ const AuthStack = createStackNavigator();
 const LoggedInStack = createStackNavigator();
 
 const homeOptions = {
-  title: 'Project Management',
+  title: 'Onetech Asia PMS',
   headerTitleStyle: {
     fontWeight: 'bold',
   },
@@ -50,7 +50,7 @@ const AuthNavigator = () => {
         }}
       />
       <Stack.Screen
-        name="ForgotPassword"
+        name="ForgotdPassword"
         component={ForgotPassword}
         options={{
           // When logging out, a pop animation feels intuitive

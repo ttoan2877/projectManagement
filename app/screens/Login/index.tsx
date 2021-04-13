@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
+import { Button, Text, TextInput } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
 import { requestLogin } from '../../store/actions/loginActions';
 import styles from './styles';
 import { ILoginState } from '../../models/reducers/login';
@@ -15,6 +15,7 @@ interface IState {
 }
 
 const Login: React.FC = () => {
+  const id = useSelector((state: IState) => state.loginReducer.id);
   const dispatch = useDispatch();
 
   const onLogin = () => {
