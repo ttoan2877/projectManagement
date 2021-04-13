@@ -6,42 +6,53 @@ import styles from './styles';
 const DATA = [
   {
     id: '1',
-    title: 'ASP.NET',
-    description: 'description',
-    assignee: '',
+    projectName: 'ASP.NET',
+    projectDescription: 'Coding using ASP.NET',
+    projectAssignee: '',
+    projectStatus: 'Closed',
   },
   {
     id: '2',
-    title: 'VB.NET',
-    description: 'description',
-    assignee: '',
+    projectName: 'VB.NET',
+    projectDescription: 'Coding using VB.NET',
+    projectAssignee: '',
+    projectStatus: 'Closed',
   },
   {
     id: '3',
-    title: 'React-Native',
-    description: 'description',
-    assignee: '',
+    projectName: 'React-Native',
+    projectDescription: 'Coding using React-Native',
+    projectAssignee: '',
+    projectStatus: 'On-going',
   },
 ];
 
-const Item = ({ id, title, description, assignee }) => (
+const Item = ({
+  id,
+  projectName,
+  projectDescription,
+  projectAssignee,
+  projectStatus,
+}) => (
   <View style={styles.item}>
     <Text style={styles.title}>
-      Project No.{id}: {title}
+      Project No.{id}: {projectName}
     </Text>
-    <Text style={styles.title}>Description: {description}</Text>
-    <Text style={styles.title}>Assignee {assignee}</Text>
+    <Text style={styles.textView}>Description: {projectDescription}</Text>
+    <Text style={styles.textView}>Assignee: {projectAssignee}</Text>
+    <Text style={styles.status}>Status: {projectStatus}</Text>
     <Button>Edit project</Button>
   </View>
 );
 
-const App = () => {
+const ViewProject: React.FC = () => {
   const renderItem = ({ item }) => (
     <Item
       id={item.id}
-      title={item.title}
-      description={item.description}
-      assignee={item.assignee}
+      projectName={item.projectName}
+      projectDescription={item.projectDescription}
+      projectAssignee={item.projectAssignee}
+      projectStatus={item.projectStatus}
     />
   );
 
@@ -56,4 +67,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default ViewProject;

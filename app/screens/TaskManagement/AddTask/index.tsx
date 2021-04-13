@@ -6,13 +6,14 @@ LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 import styles from './styles';
+import { add } from 'react-native-reanimated';
 
-const editProject: React.FC = () => {
+const addTask: React.FC = () => {
   const onSave = () => {
     try {
       return (
         <View>
-          <Text>{projectName}</Text>
+          <Text>{task}</Text>
         </View>
       );
     } catch (e) {
@@ -27,25 +28,25 @@ const editProject: React.FC = () => {
     );
   };
 
-  const [projectName, setProjectName] = useState<string>('');
-  const [projectDescription, setDescription] = useState<string>('');
-  const [projectAssignee, setAssignee] = useState<string>('');
+  const [taskTile, setTask] = useState<string>('');
+  const [taskDescription, setDescription] = useState<string>('');
+  const [taskAssignee, setAssignee] = useState<string>('');
   return (
     <View style={styles.container}>
       <TextInput
-        label="Project Name"
-        value={projectName}
-        onChangeText={projectName => setProjectName(projectName)}
+        label="Tasks"
+        value={taskTile}
+        onChangeText={taskTile => setTask(taskTile)}
       />
       <TextInput
-        label="Description"
-        value={projectDescription}
-        onChangeText={projectDescription => setDescription(projectDescription)}
+        label="Tasks Description"
+        value={taskDescription}
+        onChangeText={taskDescription => setDescription(taskDescription)}
       />
       <TextInput
         label="Assignee"
-        value={projectAssignee}
-        onChangeText={projectAssignee => setAssignee(projectAssignee)}
+        value={taskAssignee}
+        onChangeText={taskAssignee => setAssignee(taskAssignee)}
       />
       <Button onPress={onSave}>Save</Button>
       <Button onPress={onDiscard}>Discard</Button>
@@ -53,4 +54,4 @@ const editProject: React.FC = () => {
   );
 };
 
-export default editProject;
+export default addTask;

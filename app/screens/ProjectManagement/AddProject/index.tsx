@@ -28,8 +28,8 @@ const addProject: React.FC = () => {
   };
 
   const [projectName, setProjectName] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [assignee, setAssignee] = useState<string>('');
+  const [projectDescription, setDescription] = useState<string>('');
+  const [projectAssignee, setAssignee] = useState<string>('');
   return (
     <View style={styles.container}>
       <TextInput
@@ -39,13 +39,13 @@ const addProject: React.FC = () => {
       />
       <TextInput
         label="Description"
-        value={description}
-        onChangeText={description => setDescription(description)}
+        value={projectDescription}
+        onChangeText={projectDescription => setDescription(projectDescription)}
       />
       <TextInput
         label="Assignee"
-        value={assignee}
-        onChangeText={assignee => setAssignee(assignee)}
+        value={projectAssignee}
+        onChangeText={projectAssignee => setAssignee(projectAssignee)}
       />
       <Button onPress={onSave}>Save</Button>
       <Button onPress={onDiscard}>Discard</Button>
