@@ -25,7 +25,6 @@ const Login: React.FC = () => {
       console.log(e);
     }
   };
-  const onForgot = () => NavigationService.navigate('ForgotPassword');
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   return (
@@ -44,13 +43,6 @@ const Login: React.FC = () => {
       />
       <Button icon="login" onPress={onLogin} style={styles.login}>
         Login
-      </Button>
-      <Button
-        mode="text"
-        style={styles.forgot}
-        labelStyle={styles.labelStyle}
-        onPress={onForgot}>
-        Forgot Password
       </Button>
     </View>
   );
