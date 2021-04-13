@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Button, Text, TextInput } from 'react-native-paper';
+import { Button, TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestLogin } from '../../store/actions/loginActions';
 import styles from './styles';
