@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
+import { Alert, View } from 'react-native';
+import { Button, TextInput, Text } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestLogin } from '../../store/actions/loginActions';
 import styles from './styles';
 import { ILoginState } from '../../models/reducers/login';
-import NavigationService from '../../navigation/NavigationService';
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
@@ -17,16 +16,30 @@ interface IState {
 const Login: React.FC = () => {
   const id = useSelector((state: IState) => state.loginReducer.id);
   const dispatch = useDispatch();
+  let status = '';
 
   const onLogin = () => {
-    try {
+    if (username === 'Admin' && password === 'password') {
       dispatch(requestLogin(username, password));
-    } catch (e) {
-      console.log(e);
+    } else if (username === '' || password === '') {
+      Alert.alert('Notice', 'Please input Username or Password', [
+        {
+          text: 'OK',
+        },
+      ]);
+    } else {
+      Alert.alert('Notice', 'Wrong Username or Password', [
+        {
+          text: 'OK',
+        },
+      ]);
     }
   };
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  if (id === 1) {
+    status = 'Not Login';
+  }
   return (
     <View style={styles.container}>
       <TextInput
@@ -44,6 +57,7 @@ const Login: React.FC = () => {
       <Button icon="login" onPress={onLogin} style={styles.login}>
         Login
       </Button>
+      <Text style={styles.loginStatus}>Status: {status}</Text>
     </View>
   );
 };

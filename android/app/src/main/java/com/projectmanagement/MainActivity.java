@@ -1,4 +1,4 @@
-package com.rnboilerplate;
+package com.projectmanagement;
 
 import com.facebook.react.ReactActivity;
 

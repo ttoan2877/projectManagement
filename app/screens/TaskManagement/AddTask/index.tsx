@@ -1,52 +1,52 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
-import { Text, Button, TextInput } from 'react-native-paper';
+import React, { useCallback, useState } from 'react';
+import { Alert, View } from 'react-native';
+import { Button, TextInput } from 'react-native-paper';
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 import styles from './styles';
-import { add } from 'react-native-reanimated';
+import NavigationService from '../../../navigation/NavigationService';
 
-const addTask: React.FC = () => {
-  const onSave = () => {
-    try {
-      return (
-        <View>
-          <Text>{task}</Text>
-        </View>
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  const onDiscard = () => {
-    return (
-      <View>
-        <Text>Discard change</Text>
-      </View>
-    );
-  };
+const AddTask: React.FC = () => {
+  const [task, setTask] = useState<any>({});
 
-  const [taskTile, setTask] = useState<string>('');
-  const [taskDescription, setDescription] = useState<string>('');
-  const [taskAssignee, setAssignee] = useState<string>('');
+  const onChange = useCallback((prop: string, value: string) => {
+    setTask((x: any) => ({ ...x, [prop]: value }));
+  }, []);
+
+  const onSave = useCallback(() => {
+    NavigationService.navigate('ViewTask', { task });
+  }, [task]);
+
+  const onDiscard = useCallback(() => {
+    Alert.alert('Notice', 'Are you sure discard', [
+      {
+        text: 'Keep changes',
+      },
+      {
+        text: 'Sure',
+        onPress: () => NavigationService.goBack(),
+      },
+    ]);
+  }, []);
+
   return (
     <View style={styles.container}>
       <TextInput
-        label="Tasks"
-        value={taskTile}
-        onChangeText={taskTile => setTask(taskTile)}
+        label="Task Name"
+        value={task.title}
+        onChangeText={value => onChange('title', value)}
       />
       <TextInput
-        label="Tasks Description"
-        value={taskDescription}
-        onChangeText={taskDescription => setDescription(taskDescription)}
+        label="Description"
+        value={task.description}
+        onChangeText={value => onChange('description', value)}
       />
       <TextInput
         label="Assignee"
-        value={taskAssignee}
-        onChangeText={taskAssignee => setAssignee(taskAssignee)}
+        value={task.assignee}
+        onChangeText={value => onChange('assignee', value)}
       />
       <Button onPress={onSave}>Save</Button>
       <Button onPress={onDiscard}>Discard</Button>
@@ -54,4 +54,4 @@ const addTask: React.FC = () => {
   );
 };
 
-export default addTask;
+export default AddTask;

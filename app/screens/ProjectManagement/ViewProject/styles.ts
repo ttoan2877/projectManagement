@@ -1,5 +1,4 @@
 import { StyleSheet, StatusBar } from 'react-native';
-import { red100 } from 'react-native-paper/lib/typescript/styles/colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,7 +6,6 @@ const styles = StyleSheet.create({
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    backgroundColor: '#000000',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,

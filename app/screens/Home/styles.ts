@@ -6,6 +6,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
   },
+  btn: {
+    marginTop: 16,
+    marginHorizontal: 16,
+    borderRadius: 8,
+  },
 });
 
 export default styles;

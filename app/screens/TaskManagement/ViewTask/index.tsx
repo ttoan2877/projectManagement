@@ -1,9 +1,11 @@
-import React from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useState } from 'react';
 import { SafeAreaView, View, FlatList, Text } from 'react-native';
 import { Button } from 'react-native-paper';
+import NavigationService from '../../../navigation/NavigationService';
 import styles from './styles';
 
-const DATA = [
+const INITIAL_DATA = [
   {
     id: '1',
     taskName: 'Coding 1',
@@ -27,34 +29,47 @@ const DATA = [
   },
 ];
 
-const Item = ({ id, taskName, taskDescription, taskAssignee, taskStatus }) => (
+const editTask = () => NavigationService.navigate('EditTask');
+
+const Item = ({ id, taskName, description, assignee, taskStatus }: any) => (
   <View style={styles.item}>
     <Text style={styles.title}>
-      Project No.{id}: {taskName}
+      Task No.{id}: {taskName}
     </Text>
-    <Text style={styles.textView}>Description: {taskDescription}</Text>
-    <Text style={styles.textView}>Assignee: {taskAssignee}</Text>
+    <Text style={styles.textView}>Description: {description}</Text>
+    <Text style={styles.textView}>Assignee: {assignee}</Text>
     <Text style={styles.status}>Status: {taskStatus}</Text>
-    <Button>Edit Task</Button>
-    <Button>Delete Task</Button>
+    <Button onPress={editTask}>Edit task</Button>
   </View>
 );
 
-const ViewTask: React.FC = () => {
-  const renderItem = ({ item }) => (
+const ViewTask: React.FC = ({ route }: any) => {
+  const [data, setData] = useState<any[]>(INITIAL_DATA);
+
+  const renderItem = ({ item }: any) => (
     <Item
       id={item.id}
       taskName={item.taskName}
-      taskDescription={item.taskDescription}
-      taskAssignee={item.taskAssignee}
+      description={item.description}
+      assignee={item.assignee}
       taskStatus={item.taskStatus}
     />
+  );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const addNewTask = () => {
+        setData(data.concat({ ...route?.params?.task, id: data.length + 1 }));
+      };
+      addNewTask();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []),
   );
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={DATA}
+        data={data}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />

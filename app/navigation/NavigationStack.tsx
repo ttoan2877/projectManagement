@@ -7,7 +7,15 @@ import { navigationRef } from './NavigationService';
 
 import Login from '../../app/screens/Login';
 import Home from '../../app/screens/Home';
-import ForgotPassword from '../../app/screens/ForgotPassword';
+import AddProject from '../../app/screens/ProjectManagement/AddProject';
+import EditProject from '../../app/screens/ProjectManagement/EditProject';
+import ViewProject from '../../app/screens/ProjectManagement/ViewProject';
+
+import AddTask from '../../app/screens/TaskManagement/AddTask';
+import EditTask from '../../app/screens/TaskManagement/EditTask';
+import ViewTask from '../../app/screens/TaskManagement/ViewTask';
+
+import ViewAssignee from '../../app/screens/ViewAssignee';
 
 import ThemeController from '../components/ThemeController';
 import { StatusBar } from 'react-native';
@@ -19,7 +27,7 @@ const LoggedInStack = createStackNavigator();
 
 const homeOptions = {
   title: 'Onetech Asia PMS',
-  headerTitleStyle: {
+  titleStyle: {
     fontWeight: 'bold',
   },
   headerRight: () => <ThemeController />,
@@ -49,23 +57,70 @@ const AuthNavigator = () => {
           headerRight: () => <ThemeController />,
         }}
       />
-      <Stack.Screen
-        name="ForgotdPassword"
-        component={ForgotPassword}
-        options={{
-          // When logging out, a pop animation feels intuitive
-          // You can remove this if you want the default 'push' animation
-          animationTypeForReplace: isLoggedIn ? 'push' : 'pop',
-          headerRight: () => <ThemeController />,
-        }}
-      />
     </AuthStack.Navigator>
   );
 };
 
 const LoggedInNavigator = () => (
   <LoggedInStack.Navigator>
-    <Stack.Screen name="Home" component={Home} options={homeOptions} />
+    <Stack.Screen name="Home" component={Home} />
+    <Stack.Screen
+      name="ViewProject"
+      component={ViewProject}
+      options={{
+        title: 'View Project',
+        headerRight: () => <ThemeController />,
+      }}
+    />
+    <Stack.Screen
+      name="AddProject"
+      component={AddProject}
+      options={{
+        title: 'Add Project',
+        headerRight: () => <ThemeController />,
+      }}
+    />
+    <Stack.Screen
+      name="EditProject"
+      component={EditProject}
+      options={{
+        title: 'Edit Project',
+        headerRight: () => <ThemeController />,
+      }}
+    />
+
+    <Stack.Screen
+      name="ViewTask"
+      component={ViewTask}
+      options={{
+        title: 'View Task',
+        headerRight: () => <ThemeController />,
+      }}
+    />
+    <Stack.Screen
+      name="AddTask"
+      component={AddTask}
+      options={{
+        title: 'Add Task',
+        headerRight: () => <ThemeController />,
+      }}
+    />
+    <Stack.Screen
+      name="EditTask"
+      component={EditTask}
+      options={{
+        title: 'Edit Task',
+        headerRight: () => <ThemeController />,
+      }}
+    />
+    <Stack.Screen
+      name="ViewAssignee"
+      component={ViewAssignee}
+      options={{
+        title: 'View Assignee',
+        headerRight: () => <ThemeController />,
+      }}
+    />
   </LoggedInStack.Navigator>
 );
 

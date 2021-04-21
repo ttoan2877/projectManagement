@@ -1,51 +1,52 @@
-import React, { useState } from 'react';
-import { View } from 'react-native';
-import { Text, Button, TextInput } from 'react-native-paper';
+import React, { useCallback, useState } from 'react';
+import { Alert, View } from 'react-native';
+import { Button, TextInput } from 'react-native-paper';
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 import styles from './styles';
+import NavigationService from '../../../navigation/NavigationService';
 
-const addProject: React.FC = () => {
-  const onSave = () => {
-    try {
-      return (
-        <View>
-          <Text>{projectName}</Text>
-        </View>
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  const onDiscard = () => {
-    return (
-      <View>
-        <Text>Discard change</Text>
-      </View>
-    );
-  };
+const AddProject: React.FC = () => {
+  const [project, setProject] = useState<any>({});
 
-  const [projectName, setProjectName] = useState<string>('');
-  const [projectDescription, setDescription] = useState<string>('');
-  const [projectAssignee, setAssignee] = useState<string>('');
+  const onChange = useCallback((prop: string, value: string) => {
+    setProject((x: any) => ({ ...x, [prop]: value }));
+  }, []);
+
+  const onSave = useCallback(() => {
+    NavigationService.navigate('ViewProject', { project });
+  }, [project]);
+
+  const onDiscard = useCallback(() => {
+    Alert.alert('Notice', 'Are you sure discard', [
+      {
+        text: 'Keep changes',
+      },
+      {
+        text: 'Sure',
+        onPress: () => NavigationService.goBack(),
+      },
+    ]);
+  }, []);
+
   return (
     <View style={styles.container}>
       <TextInput
         label="Project Name"
-        value={projectName}
-        onChangeText={projectName => setProjectName(projectName)}
+        value={project.name}
+        onChangeText={value => onChange('name', value)}
       />
       <TextInput
         label="Description"
-        value={projectDescription}
-        onChangeText={projectDescription => setDescription(projectDescription)}
+        value={project.description}
+        onChangeText={value => onChange('description', value)}
       />
       <TextInput
         label="Assignee"
-        value={projectAssignee}
-        onChangeText={projectAssignee => setAssignee(projectAssignee)}
+        value={project.assignee}
+        onChangeText={value => onChange('assignee', value)}
       />
       <Button onPress={onSave}>Save</Button>
       <Button onPress={onDiscard}>Discard</Button>
@@ -53,4 +54,4 @@ const addProject: React.FC = () => {
   );
 };
 
-export default addProject;
+export default AddProject;

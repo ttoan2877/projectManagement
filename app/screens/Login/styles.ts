@@ -6,7 +6,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   login: {
+    flex: 1,
     padding: 8,
+  },
+  loginStatus: {
+    marginBottom: 16,
+    fontSize: 12,
   },
   forgot: {
     marginTop: 12,
